@@ -2,8 +2,8 @@ import sys
 import os
 import numpy as np
 import cv2 as cv
-from .target_processor import TargetProcessor
-from .tile_processor import TileProcessor
+from target_processor import TargetProcessor
+from tile_processor import TileProcessor
 
 
 class Mozaic:
@@ -13,7 +13,9 @@ class Mozaic:
         self.img_collection = img_collection_path
 
     def makeMozaic(self):
-        img = cv.imread(self.target_image)
+        img = cv.imread(self.target_image, 1)
+        # print(img) 3d Array is a (height, width, rgb)
+        # print(img.shape)
         tile_processor = TileProcessor(self.img_collection)
         
         return 0
