@@ -2,7 +2,7 @@ from PIL import Image
 
 
 class TargetProcessor:
-    def targetProcess(self, target_path):
+    def targetProcess(self, target_path, tile_collection):
         self.target_path = target_path
 
     def process(self):

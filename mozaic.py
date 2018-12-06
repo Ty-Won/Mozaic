@@ -5,19 +5,28 @@ import cv2 as cv
 from target_processor import TargetProcessor
 from tile_processor import TileProcessor
 
+#percentage of tile compression
+compression_x=50
+compression_y=50
+tile_size = 50
+
 
 class Mozaic:
+    
 
     def __init__(self, target_img_path, img_collection_path):
         self.target_image = target_img_path
-        self.img_collection = img_collection_path
+        self.img_collection_path = img_collection_path
 
     def makeMozaic(self):
         img = cv.imread(self.target_image, 1)
         # print(img) 3d Array is a (height, width, rgb)
         # print(img.shape)
-        tile_processor = TileProcessor(self.img_collection)
+        tile_processor = TileProcessor(self.img_collection_path, tile_size)
+        tile_collection = tile_processor.retrieve_tiles(compression_x,compression_y)
         
+        target_processor = TargetProcessor(self.target_image, tile_collection)
+
         return 0
 
 
