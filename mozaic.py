@@ -6,8 +6,6 @@ from target_processor import TargetProcessor
 from tile_processor import TileProcessor
 
 #percentage of tile compression
-compression_x=50
-compression_y=50
 tile_size = 50
 
 
@@ -22,8 +20,8 @@ class Mozaic:
         img = cv.imread(self.target_image, 1)
         # print(img) 3d Array is a (height, width, rgb)
         # print(img.shape)
-        tile_processor = TileProcessor(self.img_collection_path, tile_size)
-        tile_collection = tile_processor.retrieve_tiles(compression_x,compression_y)
+        tile_processor = TileProcessor(tile_size)
+        tile_collection = tile_processor.retrieve_tiles("./tiles",tile_size)
         
         target_processor = TargetProcessor(self.target_image, tile_collection)
 
