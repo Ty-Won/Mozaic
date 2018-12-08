@@ -8,18 +8,19 @@ class TargetProcessor:
         self.target_path = target_path
 
     def render_target(self):
-        absolute_target_path = os.path.dirname(os.path.realpath(__file__))
-        img = cv.imread(absolute_target_path+"/"+self.target_path)
-        print(img)
-        img_width = img[0]
-        img_height = img[1]
+        img = cv.imread(self.target_path)
+        print(img.shape)
+        img_height = len(img)
+        img_width = len(img[0])
+        print(img_height)
+        
 
-        for x_row in img_width:
-            for y_col in img_height:
-                np.array(img[x_row][y_col]).mean()
+        for x_row in range(img_width):
+            for y_col in range(img_height):
+                print(img[y_col][x_row].mean())
         return 0
 
 if __name__ == '__main__':
     tiles = TileProcessor(50).retrieve_tiles("./tiles")
-    processor = TargetProcessor("./mozaic.jpeg",tiles).render_target()
+    processor = TargetProcessor("/home/twong/TyDev/Mozaic/mosaic.jpeg",tiles).render_target()
         
