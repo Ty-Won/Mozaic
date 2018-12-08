@@ -1,3 +1,4 @@
 .vscode
 venv*
 tiles/.*
+__pycache__/

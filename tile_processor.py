@@ -11,7 +11,9 @@ class TileProcessor:
 
     def retrieve_tiles(self, img_collection_path):
         collection_path=img_collection_path
-        collection={}
+        rgb_collection={}
+        scaled_images={}
+
         for root, folders, files in os.walk(collection_path):
             for img in files:
                 print(img)
@@ -23,24 +25,21 @@ class TileProcessor:
                 # cv.waitKey(0)
                 # cv.destroyAllWindows()
 
-                avg_rgb = self.process(img_array, self.tile_dimension)
-                if avg_rgb in collection:
-                    collection[avg_rgb].append(img)
+                avg_rgb, reduced_img_array = self.process(img_array, self.tile_dimension)
+                if avg_rgb in rgb_collection:
+                    rgb_collection[avg_rgb].append(img)
+                    scaled_images[img].append(reduced_img_array)
                 else:
-                    collection[avg_rgb]=[img]
+                    rgb_collection[avg_rgb]=[img]
+                    scaled_images[img]=[reduced_img_array]
                 
-        return collection
+        return (rgb_collection,scaled_images)
     
-
-
-    
-
-
     
     def process(self,img_rgb_array, tile_size):
         reduced_dim_img = downscale(img_rgb_array,tile_size)
         rgb_avg = int(np.array(reduced_dim_img).mean(axis=(0,1,2)))
-        return rgb_avg
+        return (rgb_avg,reduced_dim_img)
 
 # #Used to cut down image into a square tile to solve different image dimensions
 def downscale(img_array, tile_size):

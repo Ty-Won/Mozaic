@@ -21,10 +21,9 @@ class Mozaic:
         # print(img) 3d Array is a (height, width, rgb)
         # print(img.shape)
         tile_processor = TileProcessor(tile_size)
-        tile_collection = tile_processor.retrieve_tiles("./tiles",tile_size)
+        tile_collection = tile_processor.retrieve_tiles("./tiles")
+        target_processor = TargetProcessor(self.target_image)
         
-        target_processor = TargetProcessor(self.target_image, tile_collection)
-
         return 0
 
 
