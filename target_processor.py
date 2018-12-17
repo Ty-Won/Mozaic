@@ -21,11 +21,13 @@ class TargetProcessor:
         
         rgb_values = np.fromiter(rgb_to_img_dict.keys(), dtype=float)
         
-
+        #Reminder that the images are in (height,width,rgb), 
         for x_row in range(tile_size,img_height,tile_size):
             for y_col in range(tile_size,img_width,tile_size):
-                print(img[y_col][x_row].mean())
-                pixel_avg = img[y_col-tile_size:y_col][x_row-tile_size:x_row].mean()
+                height_pixel_range = y_col-tile_size
+                width_pixel_range = x_row-tile_size
+
+                pixel_avg = img[height_pixel_range:y_col,width_pixel_range:x_row].mean()
                 matching_img = match_rgb_img( pixel_avg, rgb_values, rgb_to_img_dict, reduced_img_arr_dict)
 
 
@@ -42,11 +44,8 @@ def match_rgb_img(pixel_avg, rgb_values, rgb_to_img_dict, img_arr_collection):
     closest_rgb_val = rgb_values[matching_rgb_index]
     rgb_img_name = random.choice(rgb_to_img_dict[closest_rgb_val])
     return img_arr_collection[rgb_img_name]
-        
-
 
 
 if __name__ == '__main__':
     tiles = TileProcessor(50).retrieve_tiles("./tiles")
     processor = TargetProcessor("/home/twong/TyDev/Mozaic/us.jpg").render_target(tiles[0],tiles[1],50)
-        

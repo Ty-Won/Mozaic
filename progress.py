@@ -1,3 +1,6 @@
+import sys
+from time import sleep
 
 def progress_bar(progress,message):
-    print("\r{0}:[{1}] {2}%".format(message,"#"*(progress/10),'percent'))
+    sys.stdout.write("\r{0}:[ {1} ]%".format(message,"#"*int((progress/5))))
+    sys.stdout.flush()
