@@ -18,6 +18,9 @@ class TileProcessor:
                 print(img)
                 file_path = os.path.join(root,img)
                 img_array = cv.imread(file_path)
+
+                if(img_array is None):
+                    continue
                 
                 # cv.namedWindow(img,cv.WINDOW_NORMAL)
                 # cv.imshow(img,img_array)

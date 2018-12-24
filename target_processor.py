@@ -13,11 +13,17 @@ class TargetProcessor:
         self.target_path = target_path
 
     def render_target(self, rgb_to_img_dict, reduced_img_arr_dict, tile_size):
+        
+        
         img = cv.imread(self.target_path)
-        print(img.shape)
+        
+        if(img is None):
+            print("Error in target image: Invalid path or file")
+            return 0
+            
         img_height = len(img)
         img_width = len(img[0])
-        print(img_height)
+        
 
         # Reminder that the images are in (height,width,rgb),
         for y_col in range(tile_size, img_width, tile_size):
