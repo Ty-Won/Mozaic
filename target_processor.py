@@ -39,8 +39,8 @@ class TargetProcessor:
             percent_done = 100*(y_col)/(img_width)
             progress_bar(percent_done, "testing")
 
-        cv.imwrite("mozaic.png",img)
-        return 0
+        
+        return img
 
 # This method is responsible for finding the closest rgb average value that our original
 # image has so that we can insert the appropriate image

@@ -17,12 +17,13 @@ class Mozaic:
         self.img_collection_path = img_collection_path
 
     def makeMozaic(self):
-        img = cv.imread(self.target_image, 1)
+        #img = cv.imread(self.target_image, 1)
         # print(img) 3d Array is a (height, width, rgb)
         # print(img.shape)
         tile_processor = TileProcessor(tile_size)
-        tile_collection = tile_processor.retrieve_tiles("./tiles")
-        target_processor = TargetProcessor(self.target_image)
+        rgb_to_img_dict, reduced_img_arr_dict = tile_processor.retrieve_tiles(self.img_collection_path)
+        mozaic_arr = TargetProcessor(self.target_image).render_target(rgb_to_img_dict, reduced_img_arr_dict, tile_size)
+        cv.imwrite("mozaic.png",mozaic_arr)
         
         return 0
 

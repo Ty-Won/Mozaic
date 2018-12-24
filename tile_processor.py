@@ -15,7 +15,7 @@ class TileProcessor:
 
         for root, folders, files in os.walk(collection_path):
             for img in files:
-                print(img)
+                #print(img)
                 file_path = os.path.join(root,img)
                 img_array = cv.imread(file_path)
 
@@ -30,7 +30,7 @@ class TileProcessor:
                 avg_rgb, reduced_img_array = self.process(img_array, self.tile_dimension)
                 if avg_rgb in rgb_collection:
                     rgb_collection[avg_rgb].append(img)
-                    scaled_images[img].append(reduced_img_array)
+                    scaled_images[img]=(reduced_img_array)
                 else:
                     rgb_collection[avg_rgb]=[img]
                     scaled_images[img]=[reduced_img_array]
