@@ -18,28 +18,30 @@ class TargetProcessor:
         img_height = len(img)
         img_width = len(img[0])
         print(img_height)
-        
-        rgb_values = np.fromiter(rgb_to_img_dict.keys(), dtype=float)
-        
-        #Reminder that the images are in (height,width,rgb), 
-        for x_row in range(tile_size,img_height,tile_size):
-            for y_col in range(tile_size,img_width,tile_size):
+
+        # Reminder that the images are in (height,width,rgb),
+        for y_col in range(tile_size, img_width, tile_size):
+            for x_row in range(tile_size, img_height, tile_size):
+
                 height_pixel_range = y_col-tile_size
                 width_pixel_range = x_row-tile_size
+                pixel_arr = img[width_pixel_range:x_row, height_pixel_range:y_col]
 
-                pixel_avg = img[height_pixel_range:y_col,width_pixel_range:x_row].mean()
-                matching_img = match_rgb_img( pixel_avg, rgb_values, rgb_to_img_dict, reduced_img_arr_dict)
+                pixel_avg = pixel_arr.mean()
+                matching_img = match_rgb_img(pixel_avg, rgb_to_img_dict, reduced_img_arr_dict)
+                img[width_pixel_range:x_row, height_pixel_range:y_col]= matching_img
+            percent_done = 100*(y_col)/(img_width)
+            progress_bar(percent_done, "testing")
 
-
-                percent_done= 100*(x_row*img_width)/(img_height*img_width)
-                progress_bar(percent_done,"testing")
-        
-
+        cv.imwrite("mozaic.png",img)
         return 0
-    
-#This method is responsible for finding the closest rgb average value that our original
-#image has so that we can insert the appropriate image
-def match_rgb_img(pixel_avg, rgb_values, rgb_to_img_dict, img_arr_collection):
+
+# This method is responsible for finding the closest rgb average value that our original
+# image has so that we can insert the appropriate image
+
+def match_rgb_img(pixel_avg, rgb_to_img_dict, img_arr_collection):
+
+    rgb_values = np.fromiter(rgb_to_img_dict.keys(), dtype=float)
     matching_rgb_index = (np.abs(rgb_values-pixel_avg)).argmin()
     closest_rgb_val = rgb_values[matching_rgb_index]
     rgb_img_name = random.choice(rgb_to_img_dict[closest_rgb_val])
@@ -48,4 +50,4 @@ def match_rgb_img(pixel_avg, rgb_values, rgb_to_img_dict, img_arr_collection):
 
 if __name__ == '__main__':
     tiles = TileProcessor(50).retrieve_tiles("./tiles")
-    processor = TargetProcessor("/home/twong/TyDev/Mozaic/us.jpg").render_target(tiles[0],tiles[1],50)
+    processor = TargetProcessor("/home/twong/TyDev/Repos/Mozaic/us.jpg").render_target(tiles[0], tiles[1], 50)

@@ -29,7 +29,7 @@ class Mozaic:
 
 if __name__ == '__main__':
     if(len(sys.argv) < 3):
-        print("Please provide the following command format: \npython mozaic.py <Image Path to be mozaic> <path to collection of images>")
+        print("Please provide the following command format: \npython mozaic.py <Mozaic target image path> <path to collection of images>")
     else:
         mozaicGenerator = Mozaic(sys.argv[1], sys.argv[2])
         mozaicGenerator.makeMozaic()
