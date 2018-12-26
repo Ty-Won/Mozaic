@@ -1,4 +1,4 @@
 .vscode
 venv*
-tiles/.*
+tiles/
 __pycache__/

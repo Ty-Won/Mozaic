@@ -35,9 +35,12 @@ class TargetProcessor:
 
                 pixel_avg = pixel_arr.mean()
                 matching_img = match_rgb_img(pixel_avg, rgb_to_img_dict, reduced_img_arr_dict)
-                img[width_pixel_range:x_row, height_pixel_range:y_col]= matching_img
-            percent_done = 100*(y_col)/(img_width)
-            progress_bar(percent_done, "testing")
+                
+                # print(matching_img)
+                # print(matching_img.shape)
+
+                img[width_pixel_range:x_row, height_pixel_range:y_col] = matching_img
+            progress_bar(y_col, img_height, "testing")
 
         
         return img

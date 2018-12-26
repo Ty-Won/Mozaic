@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import cv2 as cv
+from progress import progress_bar
 
 class TileProcessor:
 
@@ -14,19 +15,18 @@ class TileProcessor:
         scaled_images={}
 
         for root, folders, files in os.walk(collection_path):
-            for img in files:
+            for img_number,img in enumerate(files):
                 #print(img)
                 file_path = os.path.join(root,img)
                 img_array = cv.imread(file_path)
 
                 if(img_array is None):
                     continue
-                
                 # cv.namedWindow(img,cv.WINDOW_NORMAL)
                 # cv.imshow(img,img_array)
                 # cv.waitKey(0)
                 # cv.destroyAllWindows()
-
+                progress_bar(img_number, len(files),"Loading Tiles")
                 avg_rgb, reduced_img_array = self.process(img_array, self.tile_dimension)
                 if avg_rgb in rgb_collection:
                     rgb_collection[avg_rgb].append(img)
