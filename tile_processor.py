@@ -33,7 +33,7 @@ class TileProcessor:
                     scaled_images[img]=(reduced_img_array)
                 else:
                     rgb_collection[avg_rgb]=[img]
-                    scaled_images[img]=[reduced_img_array]
+                    scaled_images[img]=(reduced_img_array)
                 
         return (rgb_collection,scaled_images)
     

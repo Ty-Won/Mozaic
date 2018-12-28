@@ -40,7 +40,7 @@ class TargetProcessor:
                 # print(matching_img.shape)
 
                 img[width_pixel_range:x_row, height_pixel_range:y_col] = matching_img
-            progress_bar(y_col, img_height, "testing")
+            progress_bar(y_col, img_height, "Rendering Target Image: ")
 
         
         return img
