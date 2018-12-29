@@ -12,9 +12,10 @@ class TargetProcessor:
     def __init__(self, target_path):
         self.target_path = target_path
 
+    #Takes the target image and generates the mozaic through a collection of rgb values
+    #associated with a collection of image arrays that are organized by overall rgb value
     def render_target(self, rgb_to_img_dict, reduced_img_arr_dict, tile_size):
-        
-        
+
         img = cv.imread(self.target_path)
         
         if(img is None):
@@ -40,14 +41,12 @@ class TargetProcessor:
                 # print(matching_img.shape)
 
                 img[width_pixel_range:x_row, height_pixel_range:y_col] = matching_img
-            progress_bar(y_col, img_height, "Rendering Target Image: ")
-
-        
+            progress_bar(y_col*img_height, img_width*img_height, "Rendering Target Image: ")
+            
         return img
 
-# This method is responsible for finding the closest rgb average value that our original
+# Finds the closest rgb average value that our original
 # image has so that we can insert the appropriate image
-
 def match_rgb_img(pixel_avg, rgb_to_img_dict, img_arr_collection):
 
     rgb_values = np.fromiter(rgb_to_img_dict.keys(), dtype=float)
