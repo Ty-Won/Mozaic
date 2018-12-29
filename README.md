@@ -1,4 +1,4 @@
-# Mozaic.py
+# photoBit.py
 
 ## Description
 Created using Numpy and OpenCV, this program can be used to recreate a selected photo (The target) with other images. Was developed using Python 3.5.2.
@@ -22,5 +22,5 @@ pip install requirements.txt
 
 5) Run the program
 ```python
-python mozaic.py <path to target image> <path to images to use as tiles>
+python photoBit.py <path to target image> <path to images to use as tiles>
 ```

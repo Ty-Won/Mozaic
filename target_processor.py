@@ -12,7 +12,7 @@ class TargetProcessor:
     def __init__(self, target_path):
         self.target_path = target_path
 
-    #Takes the target image and generates the mozaic through a collection of rgb values
+    #Takes the target image and generates the photoBit through a collection of rgb values
     #associated with a collection of image arrays that are organized by overall rgb value
     def render_target(self, rgb_to_img_dict, reduced_img_arr_dict, tile_size):
 
@@ -57,5 +57,8 @@ def match_rgb_img(pixel_avg, rgb_to_img_dict, img_arr_collection):
 
 
 if __name__ == '__main__':
-    tiles = TileProcessor(50).retrieve_tiles("./tiles")
-    processor = TargetProcessor("/home/twong/TyDev/Repos/Mozaic/us.jpg").render_target(tiles[0], tiles[1], 50)
+    if(len(sys.argv)<3):
+        print("Please provide the following command format: \npython photoBit.py <target image path> <tile directory path>")
+    else:
+        tiles = TileProcessor(50).retrieve_tiles(sys.argv[1])
+        processor = TargetProcessor(sys.argv[2]).render_target(tiles[0], tiles[1], 50)

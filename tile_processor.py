@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import cv2 as cv
+import sys
 from progress import progress_bar
 
 
@@ -62,5 +63,8 @@ def downscale(img_array, tile_size):
 
 
 if __name__ == "__main__":
-    directory = TileProcessor(50)
-    directory.retrieve_tiles("./tiles")
+    if(len(sys.argv)<2):
+        print("Please provide the following command format: \npython tile_processor.py <path to tile directory>")
+    else:
+        directory = TileProcessor(50)
+        directory.retrieve_tiles(sys.argv[1])
